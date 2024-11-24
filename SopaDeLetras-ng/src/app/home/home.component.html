@@ -1,0 +1,15 @@
+<div class="home">
+  <h1>¡Bienvenido al Juego de Sopa de Letras!</h1>
+  <input type="file" (change)="onFileChange($event)" accept=".xlsx" />
+
+  <div *ngIf="fileLoaded">Archivo cargado correctamente</div>
+  <div *ngIf="fileLoaded">
+    <label for="difficulty">Selecciona el nivel de dificultad:</label>
+    <select id="difficulty" [(ngModel)]="difficulty">
+      <option [value]="levels.easy">Fácil (10x10)</option>
+      <option [value]="levels.medium">Medio (10x20)</option>
+      <option [value]="levels.hard">Difícil (20x20)</option>
+    </select>
+    <button (click)="startGame()">Iniciar Juego</button>
+  </div>
+</div>

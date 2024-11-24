@@ -1,0 +1,27 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(20, 40px); 
+  grid-gap: 5px;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.cell.selected {
+  background-color: lightblue;
+}
+
+.found-words ul {
+  list-style-type: none;
+}
+
+.found-words li {
+  margin: 5px 0;
+}

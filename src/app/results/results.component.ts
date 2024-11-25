@@ -35,5 +35,9 @@ export class ResultsComponent implements OnInit{
       this.route.navigate(['home']);
     console.log(this.scores)
   }
-  
+
+
+playAgain(): void {
+  this.route.navigate(['/home']);
+}
 }

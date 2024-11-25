@@ -1,0 +1,111 @@
+<div class="game" *ngIf="!showInstructionsDialog">
+  <p-card header="¡Encuentra las palabras ocultas!" class="p-shadow-2">
+
+    <div class="game-container">
+      <div class="board-container">
+        <div class="board">
+          <div *ngFor="let row of board; let i = index" class="row">
+            <span *ngFor="let cell of row; let j = index" [class.selected]="isSelected(i, j)" (click)="selectCell(i, j)"
+              class="cell">
+              {{ cell }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls-container">
+        <h1>Jugador! {{ playerName }}</h1>
+
+        <div class="timer">
+          <p>Tiempo restante: {{ " " + timeLeft }} segundos</p>
+          <p>Intentos restantes:{{ " " + lifesLeft() }}</p>
+        </div>
+        <div class="controls">
+          <button class="me-2" (click)="validateWord()">Validar Palabra</button>
+          <button class="me-2" (click)="resetSelection()">Resetear Selección</button>
+        </div>
+        <div class="timer">
+          <p>Palabra seleccionada: {{ selectedWord }}</p>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="game-container">
+      <div class="found-container">
+        <div class="definitions-container">
+          <h2>Encontraste!</h2>
+          <ul>
+            <li *ngFor="let word of wordsInGame">
+              <span *ngIf="foundWords.includes(word.word.toUpperCase())">
+                {{ word.word }}
+              </span>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+      <div class="definitions-container">
+        <h2>Definiciones</h2>
+        <div class="timer">
+          <ul>
+            <li *ngFor="let definition of wordsInGame">{{ definition.definition }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </p-card>
+</div>
+
+
+<p-dialog [visible]="showInstructionsDialog" header="¡Como Jugar!" closable="false" [modal]="true" [draggable]="false"
+  [resizable]="false">
+
+  <div class="instruction-content">
+    <p class="fade-in delay-1">Haz clic en las letras de la cuadrícula para formar palabras.</p>
+    <div class="instruction-board fade-in delay-2">
+      <div class="instruction-row">
+        <span class="instruction-cell">P</span>
+        <span class="instruction-cell">A</span>
+        <span class="instruction-cell">L</span>
+        <span class="instruction-cell">A</span>
+        <span class="instruction-cell">B</span>
+        <span class="instruction-cell">R</span>
+        <span class="instruction-cell">A</span>
+      </div>
+    </div>
+    <br>
+
+    <div class="fade-in delay-3">¡Cuida tus intentos! Si la palabra no existe, se te restará un intento.</div>
+    <div class="fade-in delay-4">¡Cuida tu tiempo! Si se agota, perderás.</div>
+    <div class="fade-in delay-5">¡Al descubrir todas las palabras, ganarás!</div>
+
+    <div class="p-mt-4">
+      <button pButton label="Aceptar" (click)="startNewGame()" class="p-button-success">Aceptar</button>
+    </div>
+  </div>
+</p-dialog>
+
+<p-dialog [visible]="endGameDialog" header="¡Termino el juego!" closable="false" [modal]="true" [draggable]="false" [resizable]="false">
+  <div class="instruction-content">
+    <p class="fade-in delay-1">{{ endGameMessage }}</p>
+    <div class="instruction-board fade-in delay-2">
+      <div class="instruction-row">
+        <span class="instruction-cell">P</span>
+        <span class="instruction-cell">A</span>
+        <span class="instruction-cell">L</span>
+        <span class="instruction-cell">A</span>
+        <span class="instruction-cell">B</span>
+        <span class="instruction-cell">R</span>
+        <span class="instruction-cell">A</span>
+      </div>
+    </div>
+    <br>
+
+    <div class="controls">
+      <button class="me-2" (click)="startNewGamePlus()">Jugar De Nuevo</button>
+      <button class="me-2" (click)="viewTable()">Ver Tablero</button>
+    </div>
+  </div>
+</p-dialog>

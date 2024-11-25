@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 })
 export class DataService {
   words: { word: string; definition: string }[] = [];
+  fileLoaded: boolean = false;
   constructor() { }
 
   loadExcel(file: File): Promise<void> {
@@ -26,6 +27,7 @@ export class DataService {
               definition: row[keys[1]],
             };
           });
+          this.fileLoaded = true;
           resolve();
         } catch (error) {
           reject(error);
@@ -37,6 +39,9 @@ export class DataService {
     });
   }
 
+  isFileLoaded(): boolean {
+    return this.fileLoaded; // Retorna true si el archivo ha sido cargado, de lo contrario false
+  }
   getWords(): { word: string; definition: string }[] {
     return this.words;
   }

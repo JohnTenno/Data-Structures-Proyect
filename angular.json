@@ -27,6 +27,8 @@
               }
             ],
             "styles": [
+              "node_modules/primeng/resources/themes/mdc-dark-indigo/theme.css",
+              "node_modules/primeicons/primeicons.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -85,7 +87,7 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+           
             ],
             "scripts": []
           }

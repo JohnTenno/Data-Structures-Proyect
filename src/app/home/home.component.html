@@ -1,0 +1,42 @@
+<div class="home p-d-flex p-jc-center p-ai-center p-min-h-screen p-p-3">
+  <p-card class="p-shadow-2">
+    <p-dialog [visible]="!fileLoaded" header="¡Bienvenido al Juego de Sopa de Letras!" closable="false" [modal]="true"
+      [draggable]="false" [resizable]="false">
+      <div class="p-d-flex p-flex-column p-ai-center p-p-3">
+        <div><span>Seleccione un archivo Excel (.xlsx)</span></div>
+        <input type="file" (change)="onFileChange($event)" accept=".xlsx" class="p-inputtext p-mb-3"
+          [style.width.%]="100" />
+        <p *ngIf="fileLoaded" class="p-mb-3">Archivo cargado correctamente</p>
+      </div>
+    </p-dialog>
+
+    <p-dialog [visible]="!dificultySelected && fileLoaded" header="¡Seleccione el nivel de dificultad!"
+      closable="false" [modal]="true" [draggable]="false" [resizable]="false">
+      <div *ngIf="fileLoaded" class="p-d-flex p-flex-column p-ai-center p-p-3">
+        <div class="difficulty-buttons" style="padding: 10px;">
+          <button pButton label="Fácil" icon="pi pi-check" (click)="selectDifficulty(levels.easy)"
+            [class.p-button-success]="difficulty === levels.easy" class="p-button-text"
+            style="width: 100px; cursor: pointer;"></button>
+          <button pButton label="Medio" icon="pi pi-check" (click)="selectDifficulty(levels.medium)"
+            [class.p-button-info]="difficulty === levels.medium" class="p-button-text"
+            style="width: 100px; cursor: pointer;"></button>
+          <button pButton label="Difícil" icon="pi pi-check" (click)="selectDifficulty(levels.hard)"
+            [class.p-button-warning]="difficulty === levels.hard" class="p-button-text"
+            style="width: 100px; cursor: pointer;"></button>
+        </div>
+      </div>
+    </p-dialog>
+
+    <p-dialog [visible]="dificultySelected" header="¡Ingrese su nombre de jugador!" closable="false" [modal]="true"
+      [draggable]="false" [resizable]="false">
+      <form #playerForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="playerName">Nombre del Jugador</label><br>
+          <input type="text" id="playerName" name="playerName" class="form-control" [(ngModel)]="playerName" required
+            minlength="3" placeholder="Ingresa tu nombre" />
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!playerForm.valid">Jugar!</button>
+      </form>
+    </p-dialog>
+  </p-card>
+</div>

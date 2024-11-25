@@ -40,7 +40,7 @@ export class DataService {
   }
 
   isFileLoaded(): boolean {
-    return this.fileLoaded; // Retorna true si el archivo ha sido cargado, de lo contrario false
+    return this.fileLoaded;
   }
   getWords(): { word: string; definition: string }[] {
     return this.words;

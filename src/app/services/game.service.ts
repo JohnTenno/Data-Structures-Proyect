@@ -84,7 +84,7 @@ export class GameService {
       for (let j = 0; j < this.board[i].length; j++) {
         if (this.board[i][j] === ' ') {
           this.board[i][j] =  String.fromCharCode(65 + Math.floor(Math.random() * 26)); 
-          this.board[i][j] = " ";
+          // this.board[i][j] = " ";
         }
       }
     }

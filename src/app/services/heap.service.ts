@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root', // Hace que este servicio sea un singleton gestionado por Angular.
+  providedIn: 'root',
 })
 export class HeapService<T> {
   private heap: { score: number; player: T }[] = [];
 
-  // Inserta un jugador y su puntuación en el heap
   insert(player: T, score: number): void {
     this.heap.push({ score, player });
     this.bubbleUp();
   }
 
-  // Extrae el elemento con la puntuación más alta del heap
   extractMax(): { score: number; player: T } | null {
     if (this.heap.length === 0) return null;
     if (this.heap.length === 1) return this.heap.pop()!;
@@ -23,12 +21,9 @@ export class HeapService<T> {
     return max;
   }
 
-  // Devuelve todos los elementos del heap ordenados por puntuación descendente
   getAll(): { score: number; player: T }[] {
     return [...this.heap].sort((a, b) => b.score - a.score);
   }
-
-  // Operaciones privadas para mantener el heap en orden
 
   private bubbleUp(): void {
     let index = this.heap.length - 1;
